@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: test
+    username: test
+    password: test
+    driver-class-name: test
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+jwt:
+  secret: test
+  expiration-time: 3600000 # 1시간 (ms 단위)
+
+logging:
+  level:
+    org.hibernate.SQL: debug
