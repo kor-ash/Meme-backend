@@ -1,5 +1,6 @@
-package backend.common;
+package backend.exception;
 
+import backend.common.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(ApiResponse.error(400, errorMessage));
     }
 
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<Void>> handleEmailDuplication(EmailAlreadyExistsException e) {
+        log.warn("Email Duplication error: {}", e.getMessage());
+        return ResponseEntity.badRequest().body(ApiResponse.error(400, e.getMessage()));
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidCredentials(InvalidCredentialsException e) {
+        log.warn("Password Invalid error: {}", e.getMessage());
+        return ResponseEntity.badRequest().body(ApiResponse.error(401, e.getMessage()));
+    }
     /**
      * 비즈니스 로직 에러 (IllegalArgumentException)
      */
